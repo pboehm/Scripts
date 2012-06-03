@@ -10,10 +10,23 @@
 # author: Philipp Böhm
 
 NOCHZUSCHAUEN=~/Downloads/.nochzuschauen/
+HISTORY_FILE=~/.local/share/recently-used.xbel
 
 episodefile=$1
 seriesname=$2
 
+###
+# check if this epsiode was already played and could be removed
+if [[ -f $HISTORY_FILE ]]; then
+    if [[ -n `egrep "$episodefile" $HISTORY_FILE` ]]; then
+        echo "episode was already played, I move this to the trash folder"
+        trash-put "$episodefile"
+        exit
+    fi
+fi
+
+###
+# build up the targetdir and moves this into this dir
 target=$NOCHZUSCHAUEN
 
 if [[ -n $seriesname ]]; then
