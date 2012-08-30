@@ -5,11 +5,10 @@
 #
 # Autor: Philipp Böhm
 
-GSL_PATH=~/projects/getserieslinks/getserieslinks.pl
 GSL_LINKS_PATH=/tmp/gsl_links.txt
 JD_PATH=~/.jd/JDownloader.jar
 
-$GSL_PATH --nodecrypt $@
+sjunkieex $@
 
 if [[ -z `cat $GSL_LINKS_PATH` ]]; then
     exit 0
