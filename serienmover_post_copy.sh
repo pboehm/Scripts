@@ -13,12 +13,17 @@ NOCHZUSCHAUEN=~/Downloads/.nochzuschauen/
 HISTORY_FILE=~/.local/share/recently-used.xbel
 
 episodefile=$1
+[[ ! -f $episodefile ]] && echo "file '$episodefile' not exists" && exit
+
+encoded_episode=$(python -c "import urllib; print urllib.quote('''$episodefile''')")
+
 seriesname=$2
 
 ###
 # check if this epsiode was already played and could be removed
 if [[ -f $HISTORY_FILE ]]; then
-    if [[ -n `egrep "$episodefile" $HISTORY_FILE` ]]; then
+    if [[  -n `egrep "$episodefile" $HISTORY_FILE` || -n `egrep "$encoded_episode" $HISTORY_FILE` ]]
+    then
         echo "episode was already played, I move this to the trash folder"
         trash-put "$episodefile"
         exit
