@@ -9,6 +9,7 @@
 #
 # author: Philipp Böhm
 
+WEITERSCHAUEN=~/Downloads/.weiterschauen/
 NOCHZUSCHAUEN=~/Downloads/.nochzuschauen/
 HISTORY_FILE=~/.local/share/recently-used.xbel
 
@@ -32,12 +33,11 @@ fi
 
 ###
 # build up the targetdir and moves this into this dir
-target=$NOCHZUSCHAUEN
+target="$WEITERSCHAUEN$seriesname/"
 
-if [[ -n $seriesname ]]; then
-    target="$target$seriesname/"
+if [[ ! -d $target ]]; then
+    target="$NOCHZUSCHAUEN$seriesname/"
+    mkdir -p "$target"
 fi
-
-mkdir -p "$target"
 
 mv "$episodefile" "$target"
