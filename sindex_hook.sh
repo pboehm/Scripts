@@ -12,5 +12,5 @@ if [[ $1 == "pre" ]]; then
 fi
 
 if [[ $1 == "post" ]]; then
-    git add seriesindex.xml && git commit -m "Sindex: Post-Processing Commit" && git push
+    git add seriesindex.xml && git commit -m "Series: Post-Processing Commit" && git push
 fi
