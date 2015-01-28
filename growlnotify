@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# A POSIX variable
+OPTIND=1         # Reset in case getopts has been used previously in the shell.
+
+# Initialize our own variables:
+title=""
+message=""
+
+while getopts "t:m:" opt; do
+    case "$opt" in
+        t)  title="$OPTARG"
+            ;;
+        m)  message="$OPTARG"
+            ;;
+    esac
+done
+
+shift $((OPTIND-1))
+
+[ "$1" = "--" ] && shift
+
+echo "Title: '$title' Message: '$message'"
+
+terminal-notifier\
+    -title "$title"\
+    -message "$message"\
+    -sender com.jetbrains.intellij
+sleep 2
